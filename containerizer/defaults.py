@@ -11,6 +11,7 @@ class COMMAND_TYPES(enum.Enum):
     POST_RUN = "post_run"
     RUN_CMD = "run_cmd"
 
+
 class FRAMEWORKS(enum.Enum):
     DJANGO = "django"
     FLASK = "flask"
@@ -20,10 +21,11 @@ class FRAMEWORKS(enum.Enum):
     SPRING = "spring"
     LARAVEL = "larvel"
 
+
 OPTIONS: Dict[FRAMEWORKS, Dict[COMMAND_TYPES, List[str]]] = {
     FRAMEWORKS.DJANGO: {
         COMMAND_TYPES.PRE_RUN: [
-  #          "python3 manage.py makemigrations --no-input",
+            #          "python3 manage.py makemigrations --no-input",
             "python3 manage.py migrate --no-input",
             "python3 manage.py collectstatic --no-input",
         ],
@@ -35,10 +37,12 @@ OPTIONS: Dict[FRAMEWORKS, Dict[COMMAND_TYPES, List[str]]] = {
             "export FLASK_ENV=production",
             "flask db upgrade",
         ],
-        COMMAND_TYPES.RUN_CMD: ["waitress-serve --call ${FILE} --port=${PORT}"],
+        COMMAND_TYPES.RUN_CMD: ["waitress-serve --port=${PORT} ${WGSI}"],
     },
     FRAMEWORKS.FASTAPI: {
-        COMMAND_TYPES.RUN_CMD: ["python -m fastapi run ${FILE} --host 0.0.0.0 --port ${PORT}"], # Uvicorn based
+        COMMAND_TYPES.RUN_CMD: [
+            "python -m fastapi run ${FILE} --host 0.0.0.0 --port ${PORT}"
+        ],  # Uvicorn based
     },
     FRAMEWORKS.RAILS: {
         COMMAND_TYPES.PRE_RUN: [
@@ -56,14 +60,15 @@ OPTIONS: Dict[FRAMEWORKS, Dict[COMMAND_TYPES, List[str]]] = {
         COMMAND_TYPES.RUN_CMD: ["PORT=${PORT} npm start"],
     },
     FRAMEWORKS.SPRING: {
-        COMMAND_TYPES.BUILD: [
-            "./mvnw clean install"
+        COMMAND_TYPES.BUILD: ["./mvnw clean install"],
+        COMMAND_TYPES.RUN_CMD: [
+            "mvnw spring-boot:run -Dspring-boot.run.arguments=--server.port=${PORT}"
         ],
-        COMMAND_TYPES.RUN_CMD: ["mvnw spring-boot:run -Dspring-boot.run.arguments=--server.port=${PORT}"],
     },
     FRAMEWORKS.LARAVEL: {
         COMMAND_TYPES.BUILD: [
-            "composer install",],
+            "composer install",
+        ],
         COMMAND_TYPES.PRE_RUN: [
             "php artisan migrate",
             "php artisan config:cache",
@@ -73,3 +78,6 @@ OPTIONS: Dict[FRAMEWORKS, Dict[COMMAND_TYPES, List[str]]] = {
         COMMAND_TYPES.RUN_CMD: ["php artisan serve --host=0.0.0.0 --port=${PORT}"],
     },
 }
+
+
+

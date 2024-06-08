@@ -1,40 +1,12 @@
-from typing import Optional
-from .constants import *
 from string import Template
 import os
 from ..defaults import *
-import dataclasses
-
-
-@dataclasses.dataclass
-class Options:
-    language: LANGUAGES
-    framework: FRAMEWORKS
-    version: str
-    port: Optional[int] = None
-    install_command: Optional[str] = None
-    run_command: Optional[str] = None
-    app_file: Optional[str] = "app.py"  # todo
-
-    def __post_init__(self):  # Fill in the blanks
-        if self.port is None:
-            self.port = 8000
-        if self.install_command is None:
-            self.install_command = INSTALL_COMMANDS[self.language]
-        if self.run_command is None:
-            self.run_command = convert_list(
-                OPTIONS[self.framework][COMMAND_TYPES.RUN_CMD]
-            )
-        assert self.language in LANGUAGES, f"Language {self.language} not supported"
-
-        assert (
-            self.version in VERSIONS[self.language]
-        ), f"Version {self.version} not supported for {self.language}"
-
+from ..constants import *
+from ..types import Options
+from ..utils import convert_to_list_args, process_build_args
 
 def process(dockerfile: str, options: Options):
     # get all variables in the dockerfile dynamically and replace them with the values
-    convert_to_list_args = lambda x: x.split(" ") if x else []
 
     def convert(data):
         return Template(data).substitute(
@@ -44,22 +16,25 @@ def process(dockerfile: str, options: Options):
             FILE=options.app_file,
         )
 
+    def convert_to_run(options: Options):
+        if options.framework == FRAMEWORKS.FLASK:
+            assert options.run_command is not None, "Run command not provided"
+            options.run_command = options.run_command.replace(
+                "${WGSI}", f"{str(options.app_file).split('.')[0]}:{options.app_name}"
+            )
+        return repr(convert_to_list_args(convert(options.run_command))).replace(
+            "'", '"'
+        )
+
+    BUILD_COMMANDS = process_build_args(options, convert)
     return Template(dockerfile).substitute(
         VERSION=options.version,
         INSTALL_COMMAND=convert(options.install_command),
-        RUN_COMMAND=repr(convert_to_list_args(convert(options.run_command))).replace("'", '"'),
+        RUN_COMMAND=convert_to_run(options),
+        BUILD_COMMANDS=BUILD_COMMANDS,
         LANGUAGE=options.language.value,
         FILE=options.app_file,
     )
-
-
-def convert_list(list_cmds: List):
-    return " && ".join(list_cmds)
-
-
-def convert_to_run(command: str):
-    command = '"," '.join(command.split(" "))
-    return f" [{command}]"
 
 
 def dockerize(options: Options):
