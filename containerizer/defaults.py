@@ -35,10 +35,10 @@ OPTIONS: Dict[FRAMEWORKS, Dict[COMMAND_TYPES, List[str]]] = {
             "export FLASK_ENV=production",
             "flask db upgrade",
         ],
-        COMMAND_TYPES.RUN_CMD: ["waitress-serve --call {APP_NAME} --port=${PORT}"],
+        COMMAND_TYPES.RUN_CMD: ["waitress-serve --call ${FILE} --port=${PORT}"],
     },
     FRAMEWORKS.FASTAPI: {
-        COMMAND_TYPES.RUN_CMD: ["python -m fastapi run {FILE} --host 0.0.0.0 --port ${PORT}"], # Uvicorn based
+        COMMAND_TYPES.RUN_CMD: ["python -m fastapi run ${FILE} --host 0.0.0.0 --port ${PORT}"], # Uvicorn based
     },
     FRAMEWORKS.RAILS: {
         COMMAND_TYPES.PRE_RUN: [
