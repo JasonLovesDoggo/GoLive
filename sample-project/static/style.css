@@ -34,7 +34,7 @@ body {
 
 .container {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     padding: 16px 10px;
     gap: 10px;
     /* border: 1px solid red; */
@@ -66,6 +66,10 @@ body {
     font-weight: 400;
     color: var(--white);
     margin: 0;
+    height: 36px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
 }
 
 .description {
@@ -76,12 +80,12 @@ body {
 }
 
 .defaultInput[type="file"]  {
-    background-color: transparent;
+    display: none
+}
+
+.chooseFile {
+    cursor: pointer;
     border: 1px solid var(--white);
-    color: var(--white);
-    padding: 5px;
-    font-family: 'Kantumruy', sans-serif;
-    /* border: var(--white);
     background-color: var(--black);
     border-radius: 10px;
     height: 36px;
@@ -91,8 +95,32 @@ body {
     align-items: center;
     justify-content: center;
     color: var(--white);
-    font-family: 'Kantumruy', sans-serif; */
+    font-family: 'Kantumruy', sans-serif;
+}
 
+select {
+    cursor: pointer;
+    border: 1px solid var(--white);
+    background-color: var(--black);
+    border-radius: 10px;
+    height: 36px;
+    width: 250px;
+    padding: 0 16px;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-family: 'Kantumruy', sans-serif;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url(https://flaticons.net/icon.php?slug_category=application&slug_icon=arrowhead-down-01) 96% / 3% no-repeat;
+
+}
+
+select::-ms-expand {
+    display: none; /* Remove default arrow in Internet Explorer 10 and 11 */
 }
 
 .deployButton {
@@ -106,4 +134,36 @@ body {
     align-items: center;
     justify-content: center;
     color: var(--black);
+}
+
+input[type="radio"] {
+    display: none
+}
+
+.selectionContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 12px 6px;
+    flex-wrap: wrap;
+    width: 400px;
+}
+
+.selection {
+    cursor: pointer;
+    border: 1px solid var(--gray);
+    background-color: var(--black);
+    border-radius: 10px;
+    height: 36px;
+    width: fit-content;
+    padding: 0 16px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-family: 'Kantumruy', sans-serif;
+}
+
+input[type="radio"]:checked + .selection {
+    border: 1px solid var(--white);
 }

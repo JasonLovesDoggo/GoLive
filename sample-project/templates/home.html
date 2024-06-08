@@ -21,7 +21,10 @@
 
         <div class="container">
             <h2 class="header2">Select a project</h2>
-            <input type="file" id="fileUpload" name="fileUpload" class="defaultInput chooseFile description">
+            <label for="fileUpload" class="chooseFile description">
+                Choose a file
+                <input type="file" id="fileUpload" name="fileUpload" class="defaultInput description" webkitdirectory directory multiple>
+            </label>
         </div>
 
         <hr class="divider">
@@ -29,10 +32,15 @@
         <div class="container">
             <h2 class="header2">Select a framework</h2>
             <div class="defaultInput dropDown description">
-                <select id="options" name="options">
-                    <option value="option1">Option 1</option>
-                    <option value="option2">Option 2</option>
-                    <option value="option3">Option 3</option>
+                <select id="options" name="options" class="description">
+                    <option class="description" value="option1">No framework detected</option>
+                    <option class="description" value="option2">django</option>
+                    <option class="description" value="option3">flask</option>
+                    <option class="description" value="option3">fastapi</option>
+                    <option class="description" value="option3">rails</option>
+                    <option class="description" value="option3">express</option>
+                    <option class="description" value="option3">spring</option>
+                    <option class="description" value="option3">larvel</option>
                 </select>
             </div>
         </div>
@@ -41,20 +49,29 @@
 
         <div class="container">
             <h2 class="header2">Select provider</h2>
-            <div  class="defaultInput selection">
-                <p class="description">Select one:</p>
+            <div class="selectionContainer">
                 <input type="radio" id="button1" name="selectButton" value="Local host">
-                <label class="description" for="button1">Button 1</label><br>
+                <label class="selection description" for="button1">
+                    Local host
+                </label><br>
                 <input type="radio" id="button2" name="selectButton" value="Google cloud">
-                <label class="description" for="button2">Button 2</label><br>
-                <input type="radio" id="button3" name="selectButton" value="Amazon web service">
-                <label class="description" for="button3">Button 3</label>
-                <input type="radio" id="button3" name="selectButton" value="Linode">
-                <label class="description" for="button3">Button 3</label>
+                <label class="selection description" for="button2">
+                    Google cloud
+                </label><br>
+                <input type="radio" id="button3" name="selectButton" value="Amazon cloud service">
+                <label class="selection description" for="button3">
+                    Amazon cloud service
+                </label><br>
+                <input type="radio" id="button4" name="selectButton" value="Linode">
+                <label class="selection description" for="button4">
+                    Linode
+                </label><br>
             </div>
         </div>
 
-        <button class="deployButton description">Deploy app</button>
+        <div class="container">
+            <button class="deployButton description">Deploy app</button>
+        </div>
     </div>
 </body>
 </html>
