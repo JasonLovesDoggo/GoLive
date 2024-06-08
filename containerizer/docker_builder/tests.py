@@ -4,7 +4,6 @@ from ..defaults import *
 from ..utils import convert_list
 
 
-
 def test_dockerize():
     opt = Options(
         language=LANGUAGES.PYTHON,
@@ -33,6 +32,7 @@ def test_convert_list():
     assert (
         command == "python3 manage.py runserver && python3 manage.py migrate --no-input"
     )
+
 
 test_convert_list()
 test_dockerize()

@@ -5,6 +5,7 @@ from ..constants import *
 from ..types import Options
 from ..utils import convert_to_list_args, process_build_args
 
+
 def process(dockerfile: str, options: Options):
     # get all variables in the dockerfile dynamically and replace them with the values
 
