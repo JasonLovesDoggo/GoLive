@@ -8,7 +8,7 @@ os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
 
 
 app = Flask(__name__)
-app.secret_key = "YOUR_SECRET_KEY"
+app.secret_key = os.urandom(24)
 
 
 # Replace with your client secret file path
