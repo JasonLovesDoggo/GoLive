@@ -19,6 +19,7 @@ def process(
         VERSION=version,
         INSTALL_COMMAND=install_command,
         RUN_COMMAND=convert_to_list_args(run_command),
+        LANGUAGE=language,
     )
 
 
