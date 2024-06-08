@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="nav">
+        <img src="{{ url_for('static', filename='assets/GoLive!Logo3.png') }}" alt="logo" class="logo">
+    </div>
+
+    <form id="deploy" method="POST" action="/submit" enctype="multipart/form-data">
+        <div class="main">
+            <div class="top-container container">
+                <h1 class="header1">Deploy an app</h1>
+                <p class="description">Directly deploy your app on GoLive! from your local directory. Upload your file and we’ll do the rest so you can focus on building without the hassles.</p>
+            </div>
+
+            <hr class="divider">
+
+
+            <div class="container">
+                <h2 class="header2">Select a project</h2>
+                
+                <input type="text" id="textInput" name="directory" class="textInput" placeholder="my/directory/to/main/file">
+
+            </div>
+            
+            <hr class="divider">
+            
+            <div class="container">
+                <h2 class="header2">Select a language</h2>
+                <div class="defaultInput dropDown description">
+                    <select id="languages" name="language" class="description">
+                        <option class="description" value="noLanguage">No language detected</option>
+                        <option class="description" value="python">python</option>
+                        <option class="description" value="javascript">javascript</option>
+                        <option class="description" value="ruby">ruby</option>
+                        <option class="description" value="go">go</option>
+                        <option class="description" value="dart">dart</option>
+                        <option class="description" value="swift">swift</option>
+                        <option class="description" value="cpp">cpp</option>
+                        <option class="description" value="c">c</option>
+                        <option class="description" value="csharp">csharp</option>
+                        <option class="description" value="kotlin">kotlin</option>
+                        <option class="description" value="scala">scala</option>
+                        <option class="description" value="rust">rust</option>
+                        <option class="description" value="php">php</option>
+                    </select>
+                </div>
+            </div>
+            
+            <hr class="divider">
+            <div class="container">
+                <h2 class="header2">Select a framework</h2>
+                <div class="defaultInput dropDown description">
+                    <select id="options" name="framework" class="description">
+                        <option class="description" value="noFramework">No framework detected</option>
+                        <option class="description" value="django">django</option>
+                        <option class="description" value="flask">flask</option>
+                        <option class="description" value="fastapi">fastapi</option>
+                        <option class="description" value="rails">rails</option>
+                        <option class="description" value="express">express</option>
+                        <option class="description" value="spring">spring</option>
+                        <option class="description" value="larvel">larvel</option>
+                    </select>
+                </div>
+            </div>
+            
+            <hr class="divider">
+            
+            <div class="container">
+                <h2 class="header2">Select provider</h2>
+                <div class="selectionContainer">
+                    <input type="radio" id="button1" name="provider" value="Local host">
+                    <label class="selection description" for="button1">
+                        Local host
+                    </label><br>
+                    <input type="radio" id="button2" name="provider" value="Google cloud">
+                    <label class="selection description" for="button2">
+                        Google cloud
+                    </label><br>
+                    <input type="radio" id="button3" name="provider" value="Amazon cloud service">
+                    <label class="selection description" for="button3">
+                        Amazon cloud service
+                    </label><br>
+                    <input type="radio" id="button4" name="provider" value="Linode">
+                    <label class="selection description" for="button4">
+                    Linode
+                </label><br>
+            </div>
+            </div>
+                
+            <div class="container">
+                <input type="submit" value="Deploy" class="deployButton description"/>
+            </div>
+        </div>
+    </form>
+    
+</body>
+</html>
