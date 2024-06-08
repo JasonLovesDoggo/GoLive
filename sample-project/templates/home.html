@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="nav">
+        <img src="" alt="" class="logo">
+    </div>
+
+    <div class="main">
+        <div class="top-container container">
+            <h1 class="header1">Deploy an app</h1>
+            <p class="description">Directly deploy your app on GoLive! from your local directory. Upload your file and we’ll do the rest so you can focus on building without the hassles.</p>
+        </div>
+
+        <hr class="divider">
+
+        <div class="container">
+            <h2 class="header2">Select a project</h2>
+            <input type="file" id="fileUpload" name="fileUpload" class="defaultInput chooseFile description">
+        </div>
+
+        <hr class="divider">
+
+        <div class="container">
+            <h2 class="header2">Select a framework</h2>
+            <div class="defaultInput dropDown description">
+                <select id="options" name="options">
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                    <option value="option3">Option 3</option>
+                </select>
+            </div>
+        </div>
+
+        <hr class="divider">
+
+        <div class="container">
+            <h2 class="header2">Select provider</h2>
+            <div  class="defaultInput selection">
+                <p class="description">Select one:</p>
+                <input type="radio" id="button1" name="selectButton" value="Local host">
+                <label class="description" for="button1">Button 1</label><br>
+                <input type="radio" id="button2" name="selectButton" value="Google cloud">
+                <label class="description" for="button2">Button 2</label><br>
+                <input type="radio" id="button3" name="selectButton" value="Amazon web service">
+                <label class="description" for="button3">Button 3</label>
+                <input type="radio" id="button3" name="selectButton" value="Linode">
+                <label class="description" for="button3">Button 3</label>
+            </div>
+        </div>
+
+        <button class="deployButton description">Deploy app</button>
+    </div>
+</body>
+</html>
