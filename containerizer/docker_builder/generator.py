@@ -39,7 +39,7 @@ def process(dockerfile: str, options: Options):
     def convert(data):
         return Template(data).substitute(
             VERSION=options.version,
-            LANGUAGE=options.language,
+            LANGUAGE=options.language.value,
             PORT=options.port,
             FILE=options.app_file,
         )
@@ -47,8 +47,8 @@ def process(dockerfile: str, options: Options):
     return Template(dockerfile).substitute(
         VERSION=options.version,
         INSTALL_COMMAND=convert(options.install_command),
-        RUN_COMMAND=convert_to_list_args(convert(options.run_command)),
-        LANGUAGE=options.language,
+        RUN_COMMAND=repr(convert_to_list_args(convert(options.run_command))).replace("'", '"'),
+        LANGUAGE=options.language.value,
         FILE=options.app_file,
     )
 
@@ -58,7 +58,7 @@ def convert_list(list_cmds: List):
 
 
 def convert_to_run(command: str):
-    command = "',' ".join(command.split(" "))
+    command = '"," '.join(command.split(" "))
     return f" [{command}]"
 
 
