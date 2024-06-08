@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 
 @app.route("/")
-def home():s
+def home():
     return "WOWWW I'VE BEEN DEPLOYEED THANK THE GODS!"
 
 
