@@ -50,10 +50,10 @@ def oauth2callback():
         redirect_uri=REDIRECT_URI
     )
     flow.fetch_token(authorization_response=request.url)
-    
+
     credentials = flow.credentials
     session['credentials'] = credentials_to_dict(credentials)
-    
+
     return redirect(url_for('success'))
 
 

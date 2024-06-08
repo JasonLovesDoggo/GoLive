@@ -2,6 +2,7 @@ from .defaults import *
 from .docker_builder.generator import Options, dockerize
 from .constants import *
 
+
 def generate():
     print("Generating container...")
     opt = Options(
