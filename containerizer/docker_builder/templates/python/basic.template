@@ -1,5 +1,5 @@
-FROM python:{{VERSION_python}}-alpine
-RUN mkdir /app
-ADD . /app
+FROM python:${VERSION}-alpine
 WORKDIR /app
-CMD ["python3", "app.py"]
+ADD . /app
+RUN ${INSTALL_COMMAND}
+CMD ${RUN_COMMAND}
