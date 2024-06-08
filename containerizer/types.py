@@ -3,6 +3,8 @@ from typing import List, Optional
 from .defaults import *
 from .constants import *
 from .utils import convert_list
+
+
 @dataclasses.dataclass
 class Options:
     language: LANGUAGES
@@ -33,4 +35,3 @@ class Options:
         assert (
             self.version in VERSIONS[self.language]
         ), f"Version {self.version} not supported for {self.language}"
-
