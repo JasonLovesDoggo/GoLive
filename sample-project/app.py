@@ -1,7 +1,6 @@
-from flask import Flask, redirect, url_for, session, request, jsonify, render_template
+from flask import Flask, redirect, url_for, session, request, render_template
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import Flow
-from google.auth.transport.requests import Request
 import os
 import json
 
@@ -50,10 +49,10 @@ def oauth2callback():
         redirect_uri=REDIRECT_URI
     )
     flow.fetch_token(authorization_response=request.url)
-    
+
     credentials = flow.credentials
     session['credentials'] = credentials_to_dict(credentials)
-    
+
     return redirect(url_for('success'))
 
 
