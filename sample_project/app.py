@@ -1,6 +1,8 @@
 from flask import Flask, redirect, url_for, session, request, render_template
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import Flow
+from ..containerizer.types import Options
+from ..containerizer.main import generate
 import os
 import json
 
@@ -75,6 +77,39 @@ def credentials_to_dict(credentials):
         'client_secret': credentials.client_secret,
         'scopes': credentials.scopes
     }
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+from flask import Flask, request, render_template, jsonify
+from ..containerizer.types import Options
+from ..containerizer.main import generate
+app = Flask(__name__)
+
+
+@app.route("/")
+def home():
+    return render_template("home.html")
+
+
+@app.route("/submit", methods=['POST'])
+def form():
+    retrievedDirectory = request.form["directory"]
+    retrievedLanguage = request.form["language"]
+    retrievedFramework = request.form["framework"]
+    retrievedProvider = request.form["provider"]
+
+    print(retrievedDirectory, retrievedLanguage, retrievedFramework, retrievedProvider)
+    opt = Options(
+        language=retrievedLanguage,
+        framework=retrievedFramework,
+        version="",
+        project_dir=retrievedDirectory,
+    )
+    generate(opt)
+    return 'Successful', 200
+
+    
 
 
 if __name__ == '__main__':
