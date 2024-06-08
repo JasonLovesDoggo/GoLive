@@ -10,10 +10,16 @@ class COMMAND_TYPES(enum.Enum):
     PRE_RUN = "pre_run"
     POST_RUN = "post_run"
 
+class FRAMEWORKS(enum.Enum):
+    DJANGO = "django"
+    FLASK = "flask"
+    FASTAPI = "fastapi"
 
-FRAMEWORKS: Dict[str, Dict[str, List[str]]] = {
-    "django": {
-        "PRE_RUN": [
+
+
+OPTIONS: Dict[FRAMEWORKS, Dict[COMMAND_TYPES, List[str]]] = {
+    FRAMEWORKS.DJANGO: {
+        COMMAND_TYPES.PRE_RUN: [
             "python3 manage.py makemigrations --no-input",
             "python3 manage.py migrate --no-input",
             "python3 manage.py collectstatic --no-input",
