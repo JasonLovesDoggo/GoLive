@@ -17,6 +17,7 @@ class Options:
     build_commands: Optional[List[str]] = None
     install_command: Optional[str] = None
     run_command: Optional[str] = None
+    app_dir: Optional[str] = "Jamhacks8"  # todo
     app_file: Optional[str] = "app.py"  # todo
     app_name: Optional[str] = "app"  # todo // for flask
 
