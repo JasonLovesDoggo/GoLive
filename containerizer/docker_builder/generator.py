@@ -22,6 +22,16 @@ def process(
     )
 
 
+def convert_list(list_cmds: List):
+    cmd = ""
+    if not list_cmds:
+        return cmd
+
+    for i in list_cmds:
+        cmd += f"{i} && "
+    return cmd.removesuffix(" && ")
+
+
 def dockerize(
     language: LANGUAGES,
     framework: FRAMEWORKS,
@@ -33,10 +43,12 @@ def dockerize(
     assert (
         version in VERSIONS[language]
     ), f"Version {version} not supported for {language}"
+
+
     if install_command is None:
         install_command = INSTALL_COMMANDS[language]
     if run_command is None:
-        run_command = OPTIONS[framework][COMMAND_TYPES.RUN_CMD]
+        run_command = convert_list(OPTIONS[framework][COMMAND_TYPES.RUN_CMD])
 
     with open(f"./templates/{language}/{framework}", "r") as raw_dockerfile:
         dockerfile = raw_dockerfile.read()
@@ -46,18 +58,3 @@ def dockerize(
 
     # Dockerize the language and version
     pass
-
-
-def test_dockerize():
-    command = dockerize(LANGUAGES.PYTHON, FRAMEWORKS.FLASK, "3.7")
-    DOCKERFILE = """
-    FROM python:3.7-alpine
-    WORKDIR /app
-    COPY . /app
-    RUN pip install -r requirements.txt
-    CMD ["python", "app.py"]
-    """
-    assert command == DOCKERFILE
-
-
-

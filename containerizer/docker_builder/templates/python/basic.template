@@ -1,4 +1,4 @@
-FROM python:${VERSION}-alpine
+FROM ${LANGUAGE}:${VERSION}-alpine
 WORKDIR /app
 ADD . /app
 RUN ${INSTALL_COMMAND}
