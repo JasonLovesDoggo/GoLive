@@ -64,7 +64,7 @@ def success():
 
     credentials = Credentials(**session['credentials'])
 
-    return render_template('success.html', credentials=json.dumps(session['credentials'], indent=4))
+    return render_template('home.html', credentials=json.dumps(session['credentials'], indent=4))
 
 
 def credentials_to_dict(credentials):
