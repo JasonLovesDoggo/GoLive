@@ -1,7 +1,6 @@
-from flask import Flask, redirect, url_for, session, request, jsonify, render_template
+from flask import Flask, redirect, url_for, session, request, render_template
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import Flow
-from google.auth.transport.requests import Request
 import os
 import json
 
@@ -16,7 +15,7 @@ app.secret_key = 'YOUR_SECRET_KEY'
 CLIENT_SECRETS_FILE = "client_secret.json"
 
 # OAuth 2.0 configuration
-SCOPES = ['https://www.googleapis.com/auth/cloud-platform']
+SCOPES = ['https://www.googleapis.com/auth/cloud-platform'] # we need roles/compute.instanceAdmin.v1
 REDIRECT_URI = 'http://localhost:5000/oauth2callback'
 
 
@@ -61,7 +60,7 @@ def oauth2callback():
 def success():
     if 'credentials' not in session:
         return redirect('login')
-
+    global credentials
     credentials = Credentials(**session['credentials'])
 
     return render_template('home.html', credentials=json.dumps(session['credentials'], indent=4))
