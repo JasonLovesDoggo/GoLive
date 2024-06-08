@@ -2,4 +2,4 @@ FROM python:${VERSION}-alpine
 WORKDIR /app
 ADD . /app
 RUN ${INSTALL_COMMAND}
-CMD ["python3", "app.py"]
+CMD ${RUN_COMMAND}
