@@ -1,0 +1,109 @@
+:root {
+    --gray: #717069;
+    --green: #01E895;
+    --white: #FFFFFF;
+    --black: #161615;
+}
+
+
+body {
+    font-family: 'Kantumruy', sans-serif;
+    background: var(--black);
+    display: flex;
+    flex-direction: column;
+    padding: 0 40px;
+    gap: 10px;
+    align-items: center;
+}
+
+.nav {
+    padding: 30px 0;
+}
+
+.logo {
+    object-fit: contain;
+    height: 50px;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 600px;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    padding: 16px 10px;
+    gap: 10px;
+    /* border: 1px solid red; */
+}
+
+.top-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.divider {
+    width: 100%;
+    border-color: var(--gray);
+    opacity: 50%
+}
+
+.header1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--white);
+    /* border: 2px solid red; */
+    margin: 0;
+}
+
+.header2 {
+    font-size: 16px;
+    width: 180px;
+    font-weight: 400;
+    color: var(--white);
+    margin: 0;
+}
+
+.description {
+    font-size: 12px;
+    color: var(--white);
+    margin: 0;
+    /* border: 2px solid red; */
+}
+
+.defaultInput[type="file"]  {
+    background-color: transparent;
+    border: 1px solid var(--white);
+    color: var(--white);
+    padding: 5px;
+    font-family: 'Kantumruy', sans-serif;
+    /* border: var(--white);
+    background-color: var(--black);
+    border-radius: 10px;
+    height: 36px;
+    width: fit-content;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-family: 'Kantumruy', sans-serif; */
+
+}
+
+.deployButton {
+    border: none;
+    background: var(--green);
+    border-radius: 10px;
+    height: 36px;
+    width: fit-content;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--black);
+}
