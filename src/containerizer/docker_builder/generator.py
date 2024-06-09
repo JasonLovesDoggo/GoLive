@@ -4,7 +4,7 @@ from ..defaults import *
 from ..constants import *
 from ..types import Options
 from ..utils import convert_to_list_args, process_build_args
-
+import pathlib
 
 def process(dockerfile: str, options: Options):
     # get all variables in the dockerfile dynamically and replace them with the values
@@ -43,9 +43,11 @@ def dockerize(options: Options):
     template_path = os.path.join(
         os.path.dirname(__file__), "templates", "basic.template"
     )
+    build_dir = os.path.join(pathlib.Path(__file__).parent.parent.parent.parent, "build/Dockerfile")
     with open(template_path, "r") as raw_dockerfile:
         dockerfile = raw_dockerfile.read()
         dockerfile = process(dockerfile, options)
+    with open(build_dir, "w") as f:
+        f.write(dockerfile)
 
     # Dockerize the language and version
-    return dockerfile

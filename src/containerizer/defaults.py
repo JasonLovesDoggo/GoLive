@@ -20,7 +20,7 @@ class FRAMEWORKS(enum.Enum):
     EXPRESS = "express"
     SPRING = "spring"
     LARAVEL = "larvel"
-
+    GIN = "gin"
 
 OPTIONS: Dict[FRAMEWORKS, Dict[COMMAND_TYPES, List[str]]] = {
     FRAMEWORKS.DJANGO: {
@@ -76,5 +76,9 @@ OPTIONS: Dict[FRAMEWORKS, Dict[COMMAND_TYPES, List[str]]] = {
             "php artisan view:cache",
         ],
         COMMAND_TYPES.RUN_CMD: ["php artisan serve --host=0.0.0.0 --port=${PORT}"],
+    },
+    FRAMEWORKS.GIN: {
+        COMMAND_TYPES.BUILD: ["go mod download", "CGO_ENABLED=0 GOOS=linux go build -o ./binary"],
+        COMMAND_TYPES.RUN_CMD: ["./$binary"],
     },
 }

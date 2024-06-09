@@ -1,11 +1,15 @@
+import re
+from string import Template
+import subprocess
 from flask import Flask, redirect, url_for, session, request, render_template
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import Flow
+from src.autodeploy.create import create
 from src.containerizer.constants import LANGUAGES
 from src.containerizer.defaults import FRAMEWORKS
 from src.containerizer.docker_builder.generator import dockerize
 from src.containerizer.types import Options
-
+import pathlib
 import os
 import json
 
@@ -89,10 +93,11 @@ def form():
     retrievedFramework = request.form["framework"]
     retrievedProvider = request.form["provider"]
 
-    parsedLanguage = LANGUAGES[retrievedLanguage]
-    parsedFramrwork = FRAMEWORKS[retrievedFramework]
+    parsedLanguage: LANGUAGES = LANGUAGES._value2member_map_[retrievedLanguage] # type: ignore
+    parsedFramrwork: FRAMEWORKS = FRAMEWORKS._value2member_map_[retrievedFramework] # type: ignore
 
-    print(retrievedDirectory, retrievedLanguage, retrievedFramework, retrievedProvider)
+    if retrievedProvider not in ["GCP", "local"]:
+        return 'AWS & Linode are not supported yet', 400
     opt = Options(
         language=parsedLanguage,
         framework=parsedFramrwork,
@@ -100,6 +105,50 @@ def form():
         project_dir=retrievedDirectory,
     )
     dockerize(opt)
+
+    if retrievedProvider == "GCP":
+        pass
+    create(opt)
+
+    # run script
+    os.chdir(os.path.join(pathlib.Path(__file__).parent.parent, 'build'))
+    migrations = subprocess.Popen(["yes", "yes"], stdout=subprocess.PIPE)
+
+    # Pipe the output of 'yes' to 'tofu apply'
+    tofu_apply = subprocess.Popen(["tofu", "apply"], stdin=migrations.stdout, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    #subprocess.Popen(["tee", "/dev/tty"], stdin=tofu_apply.stdout, stdout=subprocess.PIPE)
+    print("waiting for tofu")
+    # Wait for 'tofu apply' to finish
+    tofu_apply.wait()
+
+    assert tofu_apply.stdout is not None, "Please don't run this twice in a row "
+    IP = None
+    IP = re.search(r'\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b', tofu_apply.stdout.read().decode("utf-8")).group(0) # type: ignore
+
+    print(IP)
+
+    path = pathlib.Path(retrievedDirectory).parent
+    print(path)
+    # run script
+    with open(os.path.join(pathlib.Path(retrievedDirectory).parent.parent, "deploy.sh"), "r") as f:
+
+        data = f.read()
+        deploy = Template(data).substitute(
+            PORT=opt.port,
+            HOST = IP,
+            BUILD_PATH = os.path.join(pathlib.Path(__file__).parent.parent, 'build'),
+            PROJECT_PATH = path,
+
+        )
+
+    deploy_path = os.path.join(pathlib.Path(__file__).parent.parent, 'build/deploy.sh')
+    with open(deploy_path, "w") as f:
+        f.write(deploy)
+
+    subprocess.run(["bash", deploy_path])
+
+
+
     return 'Successful', 200
 
 
