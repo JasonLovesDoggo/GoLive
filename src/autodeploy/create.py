@@ -12,7 +12,7 @@ def create(options: Options):
         template = f.read()
 
     template_path = os.path.join(Path(__file__).parent.parent.parent, "build")
-    with open(os.path.join(Path(__file__).parent.parent.parent, "d"), "r") as raw_json:
+    with open(os.path.join(Path(__file__).parent.parent.parent, "frontend/client_secrets.json"), "r") as raw_json:
         raw_json = raw_json.read()
         json_data = json.loads(raw_json)
         PROJECT_ID = json_data["project_id"]
