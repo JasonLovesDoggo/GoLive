@@ -239,3 +239,22 @@ input[type="radio"]:checked + .selection {
 .submit-container{
     padding-top: 0;
 }
+
+.nextSteps{
+    color:white;
+    padding: 20px 50px;
+    border: 2px solid white; /* Black border */
+    border-radius: 15px; /* Rounded corners */
+
+}
+.nextSteps h1{
+    margin-top: 15px;
+}
+ol {
+    padding-left: 0;
+    margin-left: 0;
+    list-style-position: inside;
+}
+li{
+    margin-bottom: 15px;
+}

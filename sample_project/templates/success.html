@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1 class="header1">Let's GO!! Your project has been deployed.</h1>
+    <h1 class="header1">Check it out at: {link}</h1>
+
+    <img src="{{ url_for('static', filename='assets/dancing-gopher.gif') }}" alt="">
+    <br>
+    <div class="nextSteps">
+        <h1>Next Steps:</h1>
+        <ol>
+            <li>First item</li>
+            <li>Second item</li>
+            <li>Third item</li>
+            <li>Fourth item</li>
+            <li>Fifth item</li>
+        </ol>
+    
+    </div>
+</body>
+</html>
