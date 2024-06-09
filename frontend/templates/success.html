@@ -8,20 +8,19 @@
 </head>
 <body>
     <h1 class="header1">Let's GO!! Your project has been deployed.</h1>
-    <h1 class="header1">Check it out at: {link}</h1>
+    <h1 class="header1">Check it out at: {{link}}</h1>
 
     <img src="{{ url_for('static', filename='assets/dancing-gopher.gif') }}" alt="">
     <br>
     <div class="nextSteps">
         <h1>Next Steps:</h1>
         <ol>
-            <li>First item</li>
-            <li>Second item</li>
-            <li>Third item</li>
-            <li>Fourth item</li>
-            <li>Fifth item</li>
+            <li>If you wish to view the website from the domain, please go to your DNS register (e.g. GoDaddy or PorkBun) </li>
+            <li>Go to your DNS settings and add an <b>A</b> record from @ to {{link}} </li>
+            <li>Click the button bellow</li>
+            <li>VISIT YOUR SITE!</li>
         </ol>
-    
+
     </div>
 </body>
 </html>
