@@ -195,7 +195,7 @@ EOF'"""
 
 
 
-    return render_template('success.html', link=IP)
+    return render_template('success.html', link=IP, host=opt.domain)
 
 
 
