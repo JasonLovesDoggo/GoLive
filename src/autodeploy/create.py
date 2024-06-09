@@ -31,6 +31,6 @@ if __name__ == "__main__":
         framework=FRAMEWORKS.FLASK,
         version="3.12",
         port=328,
-        project_dir="/home/json/projects/JAMHACKS8/sample_project",
+        project_dir="/home/json/projects/JAMHACKS8/sample_site",
     )
     create(opt)

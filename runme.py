@@ -1,4 +1,4 @@
-from sample_project.app import app
+from frontend.app import app
 import subprocess
 import platform
 

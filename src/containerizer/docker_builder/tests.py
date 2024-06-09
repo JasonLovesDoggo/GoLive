@@ -9,7 +9,7 @@ def test_dockerize():
         language=LANGUAGES.PYTHON,
         framework=FRAMEWORKS.FLASK,
         version="3.12",
-        project_dir="/home/json/projects/JAMHACKS8/sample_project",
+        project_dir="/home/json/projects/JAMHACKS8/sample_site",
     )
     command = dockerize(opt)
     DOCKERFILE = """FROM LANGUAGES.PYTHON:3.12-alpine

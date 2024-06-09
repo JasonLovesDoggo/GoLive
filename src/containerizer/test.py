@@ -9,7 +9,7 @@ def generate():
         language=LANGUAGES.PYTHON,
         framework=FRAMEWORKS.FLASK,
         version="3.12",
-        project_dir="/home/json/projects/JAMHACKS8/sample_project",
+        project_dir="/home/json/projects/JAMHACKS8/sample_site",
     )
     dockerize(opt)
     print("Container generated successfully!")
