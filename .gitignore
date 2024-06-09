@@ -163,5 +163,4 @@ cython_debug/
 /sample-project/client_secret.json
 
 !build/.terraform
-!build/.terraform/*
 !build/.terraform.lock.hcl
