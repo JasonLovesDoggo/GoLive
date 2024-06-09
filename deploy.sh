@@ -13,7 +13,6 @@ scp -oStrictHostKeyChecking=no -i ./id_ed25519 image.tar json@${HOST}:/home/json
 ssh  -oStrictHostKeyChecking=no  json@${HOST} -i ./id_ed25519 << "EOF"
   until caddy; do echo "Waiting for caddy"; sleep 1; done
   sudo docker image load -i /home/json/image.tar
-
-  sudo docker ps -q --filter "publish=${PORT}" | xargs sudo docker rm -f
+  sudo docker ps -q --filter "publish=80" | xargs sudo docker rm -f
   sudo docker run -d -p 80:${PORT} $$(sudo docker images | awk '{print $$1}' | awk 'NR==2')
 EOF
