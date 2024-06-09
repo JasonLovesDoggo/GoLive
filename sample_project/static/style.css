@@ -1,0 +1,225 @@
+:root {
+    --gray: #717069;
+    --green: #01E895;
+    --white: #FFFFFF;
+    --black: #161615;
+}
+
+
+body,html {
+    font-family: 'Kantumruy', sans-serif;
+    background: var(--black);
+    display: flex;
+    flex-direction: column;
+    padding: 0 50px;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.nav {
+    padding: 30px 0;
+    width: 100%;
+}
+
+.logo {
+    object-fit: contain;
+    height: 50px;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 600px;
+}
+
+.container {
+    display: flex;
+    align-items: flex-start;
+    padding: 16px 10px;
+    gap: 10px;
+    /* border: 1px solid red; */
+}
+
+.top-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.divider {
+    width: 100%;
+    border-color: var(--gray);
+    opacity: 50%
+}
+
+.header1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--white);
+    /* border: 2px solid red; */
+    margin: 0;
+}
+
+.header2 {
+    font-size: 16px;
+    width: 180px;
+    font-weight: 400;
+    color: var(--white);
+    margin: 0;
+    height: 36px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.description {
+    font-size: 12px;
+    color: var(--white);
+    margin: 0;
+    /* border: 2px solid red; */
+}
+
+.defaultInput[type="file"]  {
+    display: none
+}
+
+.chooseFile {
+    cursor: pointer;
+    border: 1px solid var(--white);
+    background-color: var(--black);
+    border-radius: 10px;
+    height: 36px;
+    width: fit-content;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-family: 'Kantumruy', sans-serif;
+}
+
+select {
+    cursor: pointer;
+    border: 1px solid var(--white);
+    background-color: var(--black);
+    border-radius: 10px;
+    height: 36px;
+    width: 250px;
+    padding: 0 16px;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-family: 'Kantumruy', sans-serif;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url(https://flaticons.net/icon.php?slug_category=application&slug_icon=arrowhead-down-01) 96% / 3% no-repeat;
+
+}
+
+select::-ms-expand {
+    display: none; /* Remove default arrow in Internet Explorer 10 and 11 */
+}
+
+.deployButton {
+    border: none;
+    background: var(--green);
+    border-radius: 10px;
+    height: 36px;
+    width: fit-content;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--black);
+}
+
+input[type="radio"] {
+    display: none
+}
+
+.selectionContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 12px 6px;
+    flex-wrap: wrap;
+    width: 400px;
+}
+
+.selection {
+    cursor: pointer;
+    border: 1px solid var(--gray);
+    background-color: var(--black);
+    border-radius: 10px;
+    height: 36px;
+    width: fit-content;
+    padding: 0 16px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-family: 'Kantumruy', sans-serif;
+}
+
+input[type="radio"]:checked + .selection {
+    border: 1px solid var(--white);
+}
+
+.textInput {
+    border: 1px solid var(--white);
+    background-color: var(--black);
+    border-radius: 10px;
+    height: 36px;
+    width: 250px;
+    padding: 0 16px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-family: 'Kantumruy', sans-serif;
+} 
+
+.loginContainer {
+    text-align: center;
+    border: 1px solid #ccc;
+    padding: 50px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.loginTitle {
+    font-size: 24px;
+    margin-bottom: 30px;
+    margin-top: 0;
+}
+
+.googleBtn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #4285f4;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    text-align: center;
+}
+
+.googleBtn:hover {
+    background-color: #357ae8;
+}
+
+.googleBtn img {
+    vertical-align: middle;
+    margin-right: 8px;
+}
