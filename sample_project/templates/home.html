@@ -15,7 +15,7 @@
         <div class="main">
             <div class="top-container container">
                 <h1 class="header1">Deploy an app</h1>
-                <p class="description">Directly deploy your app on GoLive! from your local directory. Upload your file and we’ll do the rest so you can focus on building without the hassles.</p>
+                <p class="description-main">Directly deploy your app on GoLive! from your local directory. Upload your file and we’ll do the rest so you can focus on building without the hassles.</p>
             </div>
 
             <hr class="divider">
@@ -33,7 +33,7 @@
             <div class="container">
                 <h2 class="header2">Select a language</h2>
                 <div class="defaultInput dropDown description">
-                    <select id="languages" name="language" class="description">
+                    <select id="languages" name="language" class="description-main">
                         <option class="description" value="noLanguage">No language detected</option>
                         <option class="description" value="python">python</option>
                         <option class="description" value="javascript">javascript</option>
@@ -56,7 +56,7 @@
             <div class="container">
                 <h2 class="header2">Select a framework</h2>
                 <div class="defaultInput dropDown description">
-                    <select id="options" name="framework" class="description">
+                    <select id="options" name="framework" class="description-main">
                         <option class="description" value="noFramework">No framework detected</option>
                         <option class="description" value="django">django</option>
                         <option class="description" value="flask">flask</option>
@@ -93,13 +93,13 @@
             </div>
             </div>
                 
-            <div class="container">
+            <div class="container submit-container">
                 <input type="submit" value="Deploy" class="deployButton description"/>
             </div>
         </div>
     </form>
 
-    <pre>{{ credentials }}</pre>
+    <!-- <pre>{{ credentials }}</pre> -->
 
     
 </body>
