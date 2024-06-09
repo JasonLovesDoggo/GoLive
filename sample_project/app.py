@@ -11,11 +11,23 @@ from src.containerizer.docker_builder.generator import dockerize
 from src.containerizer.types import Options
 import pathlib
 import os
-import json
+import pathlib
+import subprocess
+# from flask import Flask, redirect, url_for, session, request, render_template
+# from google.oauth2.credentials import Credentials
+# from google_auth_oauthlib.flow import Flow
+# # from ..containerizer.types import Options
+# # from ..containerizer.main import generate
+# import os
+# import pathlib
+# def loginTesting():
+#     subprocess.call("cd .")
 
-os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
+# # Set the environment variable for development purposes
+# os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
+# Initialize the Flask application
 app = Flask(__name__)
 app.secret_key = 'YOUR_SECRET_KEY'
 
@@ -65,26 +77,38 @@ def oauth2callback():
 
     return redirect(url_for('success'))
 
+# # @app.route('/profile', methods=['GET', 'POST'])
+# @app.route('/profile')
+# def profile():
+#     if 'credentials' not in session:
+#         return redirect(url_for('login'))
 
-@app.route('/success')
-def success():
-    if 'credentials' not in session:
-        return redirect('login')
-    global credentials
-    credentials = Credentials(**session['credentials'])
+#     # Load the credentials from the session
+#     credentials = Credentials(**session['credentials'])
 
-    return render_template('home.html', credentials=json.dumps(session['credentials'], indent=4))
+#     if credentials.expired and credentials.refresh_token:
+#         credentials.refresh(Request())
+
+#     session['credentials'] = credentials_to_dict(credentials)
+
+#     # Use the credentials to access the user's profile information
+#     service = build('oauth2', 'v2', credentials=credentials)
+#     user_info = service.userinfo().get().execute()
+#     loginTesting()
+#     # subprocess.call("dir")#gcloud auth login")#['/gcloud', 'auth', 'login'])
+
+#     return f"Hello, {user_info['name']}! Your email is {user_info['email']}."
 
 
-def credentials_to_dict(credentials):
-    return {
-        'token': credentials.token,
-        'refresh_token': credentials.refresh_token,
-        'token_uri': credentials.token_uri,
-        'client_id': credentials.client_id,
-        'client_secret': credentials.client_secret,
-        'scopes': credentials.scopes
-    }
+# def credentials_to_dict(credentials):
+#     return {
+#         'token': credentials.token,
+#         'refresh_token': credentials.refresh_token,
+#         'token_uri': credentials.token_uri,
+#         'client_id': credentials.client_id,
+#         'client_secret': credentials.client_secret,
+#         'scopes': credentials.scopes
+#     }
 
 @app.route("/submit", methods=['POST'])
 def form():
