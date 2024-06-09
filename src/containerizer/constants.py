@@ -46,5 +46,7 @@ VERSIONS: Dict[LANGUAGES, List[str]] = {
         "3",
         "3.12",
         "3.13.0b2",
+        "latest",
+        "stable",
     ]
 }

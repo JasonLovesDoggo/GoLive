@@ -1,8 +1,11 @@
 from flask import Flask, redirect, url_for, session, request, render_template
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import Flow
-from ..containerizer.types import Options
-from ..containerizer.main import generate
+from src.containerizer.constants import LANGUAGES
+from src.containerizer.defaults import FRAMEWORKS
+from src.containerizer.docker_builder.generator import dockerize
+from src.containerizer.types import Options
+
 import os
 import json
 
@@ -23,11 +26,12 @@ REDIRECT_URI = 'http://localhost:5000/oauth2callback'
 
 @app.route('/')
 def index():
-    return render_template('login.html')
+    return render_template('home.html')
 
 
 @app.route('/login')
 def login():
+    return render_template('login.html')
     flow = Flow.from_client_secrets_file(
         CLIENT_SECRETS_FILE,
         scopes=SCOPES,
@@ -78,20 +82,6 @@ def credentials_to_dict(credentials):
         'scopes': credentials.scopes
     }
 
-
-if __name__ == '__main__':
-    app.run(debug=True)
-from flask import Flask, request, render_template, jsonify
-from ..containerizer.types import Options
-from ..containerizer.main import generate
-app = Flask(__name__)
-
-
-@app.route("/")
-def home():
-    return render_template("home.html")
-
-
 @app.route("/submit", methods=['POST'])
 def form():
     retrievedDirectory = request.form["directory"]
@@ -99,17 +89,20 @@ def form():
     retrievedFramework = request.form["framework"]
     retrievedProvider = request.form["provider"]
 
+    parsedLanguage = LANGUAGES[retrievedLanguage]
+    parsedFramrwork = FRAMEWORKS[retrievedFramework]
+
     print(retrievedDirectory, retrievedLanguage, retrievedFramework, retrievedProvider)
     opt = Options(
-        language=retrievedLanguage,
-        framework=retrievedFramework,
-        version="",
+        language=parsedLanguage,
+        framework=parsedFramrwork,
+        version="latest",
         project_dir=retrievedDirectory,
     )
-    generate(opt)
+    dockerize(opt)
     return 'Successful', 200
 
-    
+
 
 
 if __name__ == '__main__':
