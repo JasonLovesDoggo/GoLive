@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1 class="header1">Let's GO!! Your project has been deployed.</h1>
-    <h1 class="header1">Check it out at: {{link}}</h1>
+    <h1 class="header1">Let's <span style="color: #01e895">GO</span>!! Your project has been deployed.</h1>
+    <h1 class="header1">Check it out at: <a style="color: #01e895" href="http://{{link}}">{{link}}</a></h1>
 
     <img src="{{ url_for('static', filename='assets/dancing-gopher.gif') }}" alt="">
     <br>
@@ -16,7 +16,7 @@
         <h1>Next Steps:</h1>
         <ol>
             <li>If you wish to view the website from the domain, please go to your DNS register (e.g. GoDaddy or PorkBun) </li>
-            <li>Go to your DNS settings and add an <b>A</b> record from @ to {{link}} </li>
+            <li>Go to your DNS settings and add an <b>A</b> record from <span>jammy.jajtutrfhertyst4w5 c</span> to {{link}} </li>
             <li>Click the button bellow</li>
             <li>VISIT YOUR SITE!</li>
         </ol>

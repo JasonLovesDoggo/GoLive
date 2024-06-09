@@ -77,7 +77,7 @@ def oauth2callback():
 
     return redirect(url_for('success'))
 
-# # @app.route('/profile', methods=['GET', 'POST'])
+# @app.route('/profile', methods=['GET', 'POST'])
 # @app.route('/profile')
 # def profile():
 #     if 'credentials' not in session:
@@ -100,15 +100,15 @@ def oauth2callback():
 #     return f"Hello, {user_info['name']}! Your email is {user_info['email']}."
 
 
-# def credentials_to_dict(credentials):
-#     return {
-#         'token': credentials.token,
-#         'refresh_token': credentials.refresh_token,
-#         'token_uri': credentials.token_uri,
-#         'client_id': credentials.client_id,
-#         'client_secret': credentials.client_secret,
-#         'scopes': credentials.scopes
-#     }
+def credentials_to_dict(credentials):
+    return {
+        'token': credentials.token,
+        'refresh_token': credentials.refresh_token,
+        'token_uri': credentials.token_uri,
+        'client_id': credentials.client_id,
+        'client_secret': credentials.client_secret,
+        'scopes': credentials.scopes
+    }
 
 @app.route("/submit", methods=['POST'])
 def form():
@@ -116,6 +116,9 @@ def form():
     retrievedLanguage = request.form["language"]
     retrievedFramework = request.form["framework"]
     retrievedProvider = request.form["provider"]
+    retrievedDomain = request.form["domain"] or ""
+
+    retrievedDomain = retrievedDomain.removeprefix("https://").removeprefix("http://").removesuffix("/")
 
     parsedLanguage: LANGUAGES = LANGUAGES._value2member_map_[retrievedLanguage] # type: ignore
     parsedFramrwork: FRAMEWORKS = FRAMEWORKS._value2member_map_[retrievedFramework] # type: ignore
@@ -127,6 +130,7 @@ def form():
         framework=parsedFramrwork,
         version="latest",
         project_dir=retrievedDirectory,
+        domain=retrievedDomain
     )
     dockerize(opt)
 
@@ -139,20 +143,36 @@ def form():
     migrations = subprocess.Popen(["yes", "yes"], stdout=subprocess.PIPE)
 
     # Pipe the output of 'yes' to 'tofu apply'
-    tofu_apply = subprocess.Popen(["tofu", "apply"], stdin=migrations.stdout, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    #subprocess.Popen(["tee", "/dev/tty"], stdin=tofu_apply.stdout, stdout=subprocess.PIPE)
-    print("waiting for tofu")
-    # Wait for 'tofu apply' to finish
+    tofu_apply = subprocess.Popen(["tofu", "apply"], stdin=migrations.stdout)
     tofu_apply.wait()
 
-    assert tofu_apply.stdout is not None, "Please don't run this twice in a row "
-    IP = None
-    IP = re.search(r'\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b', tofu_apply.stdout.read().decode("utf-8")).group(0) # type: ignore
-
+    web_url = subprocess.Popen(["tofu", "output", "Web-server-URL"], stdout=subprocess.PIPE)
+    web_url.wait()
+    assert opt.port is not None, "Port is not set"
+    IP = str(web_url.stdout.read().decode()).removesuffix(":" + str(opt.port) + "\"\n").removeprefix("\"http://") # type: ignore
+    # IP = re.search(r'\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b', tofu_apply.stdout.read().decode("utf-8")).group(0) # type: ignore
     print(IP)
 
     path = pathlib.Path(retrievedDirectory).parent
-    print(path)
+    deployBlock = ""
+    if opt.domain != "":
+        deployBlock = """
+sudo sh -c 'cat > /etc/caddy/Caddyfile <<EOF
+${DOMAIN} {
+    reverse_proxy localhost:${PORT}
+}
+:80 {
+    reverse_proxy localhost:${PORT}
+}
+EOF'"""
+    else:
+        deployBlock = """sudo caddy reverse-proxy --from :80 --to localhost:${PORT} &"""
+
+    deployBlock = Template(deployBlock).substitute(
+        DOMAIN = opt.domain,
+        PORT = opt.port
+    )
+
     # run script
     with open(os.path.join(pathlib.Path(retrievedDirectory).parent.parent, "deploy.sh"), "r") as f:
 
@@ -162,6 +182,8 @@ def form():
             HOST = IP,
             BUILD_PATH = os.path.join(pathlib.Path(__file__).parent.parent, 'build'),
             PROJECT_PATH = path,
+            CADDY_DEPLOY_BLOCK = deployBlock
+
 
         )
 
@@ -173,7 +195,7 @@ def form():
 
 
 
-    return 'Successful', 200
+    return render_template('success.html', link=IP)
 
 
 

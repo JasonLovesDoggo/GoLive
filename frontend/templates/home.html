@@ -102,37 +102,39 @@
             </div>
 
 
-                <hr class="divider">
+            <hr class="divider">
 
-                <div class="container">
-                    <h2 class="header2">Select provider</h2>
-                    <div class="selectionContainer">
-                        <input type="radio" id="button1" name="provider" value="local">
-                        <label class="selection description" for="button1">
-                            Local host
-                        </label><br>
-                        <input type="radio" id="button2" name="provider" value="GCP">
-                        <label class="selection description" for="button2">
-                            Google cloud
-                        </label><br>
-                        <input type="radio" id="button3" name="provider" value="AWS">
-                        <label class="selection description" for="button3">
-                            Amazon cloud service
-                        </label><br>
-                        <input type="radio" id="button4" name="provider" value="linode">
-                        <label class="selection description" for="button4">
-                            Linode
-                        </label><br>
-                    </div>
+            <div class="container">
+                <h2 class="header2">Select provider</h2>
+                <div class="selectionContainer">
+                    <input type="radio" id="button1" name="provider" value="local">
+                    <label class="selection description" for="button1">
+                        Local host
+                    </label><br>
+                    <input type="radio" id="button2" name="provider" value="GCP">
+                    <label class="selection description" for="button2">
+                        Google cloud
+                    </label><br>
+                    <input type="radio" id="button3" name="provider" value="AWS">
+                    <label class="selection description" for="button3">
+                        Amazon cloud service
+                    </label><br>
+                    <input type="radio" id="button4" name="provider" value="linode">
+                    <label class="selection description" for="button4">
+                        Linode
+                    </label><br>
                 </div>
+            </div>
 
 
-                <div class="container">
+            <div class="container">
 
-                    <div class="container submit-container">
-                        <input type="submit" value="Deploy" class="deployButton description" />
-                    </div>
+                <div class="container submit-container">
+                    <input type="submit"
+                        onclick="var e=this;setTimeout(function(){e.disabled=true;e.value='Deploying...';},0);return true;"
+                        value="Deploy" class="deployButton description" />
                 </div>
+            </div>
     </form>
 
     <!-- <pre>{{ credentials }}</pre> -->
