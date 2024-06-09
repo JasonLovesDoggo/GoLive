@@ -14,6 +14,7 @@ class Options:
     port: Optional[int] = (
         8000  # which port the user wants to run the app on (if they care)
     )
+    domain: Optional[str] = "" # domain name for the app (Optional)
     build_commands: Optional[List[str]] = None
     install_command: Optional[str] = None
     run_command: Optional[str] = None

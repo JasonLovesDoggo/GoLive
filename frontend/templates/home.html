@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Kantumruy:wght@400;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <div class="nav">
         <img src="{{ url_for('static', filename='assets/GoLive!Logo3.png') }}" alt="logo" class="logo">
@@ -15,7 +17,8 @@
         <div class="main">
             <div class="top-container container">
                 <h1 class="header1">Deploy an app</h1>
-                <p class="description-main">Directly deploy your app on GoLive! from your local directory. Upload your file and we’ll do the rest so you can focus on building without the hassles.</p>
+                <p class="description-main">Directly deploy your app on GoLive! from your local directory. Upload your
+                    file and we’ll do the rest so you can focus on building without the hassles.</p>
             </div>
 
             <hr class="divider">
@@ -24,7 +27,17 @@
             <div class="container">
                 <h2 class="header2">Select a project</h2>
 
-                <input type="text" id="textInput" name="directory" class="textInput" placeholder="my/directory/to/main/file">
+                <input required type="text" id="textInput" name="directory" class="textInput"
+                    placeholder="my/directory/to/main/file">
+
+            </div>
+
+
+            <hr class="divider">
+            <div class="container">
+                <h2 class="header2">(Optional) Enter your domain</h2>
+
+                <input type="url" id="textInput" name="domain" class="textInput" placeholder="mysite.com">
 
             </div>
 
@@ -33,7 +46,7 @@
             <div class="container">
                 <h2 class="header2">Select a language</h2>
                 <div class="defaultInput dropDown description">
-                    <select id="languages" name="language" class="description-main">
+                    <select required id="languages" name="language" class="description-main">
                         <option class="description" value="noLanguage">No language detected</option>
                         <option class="description" value="python">python</option>
                         <option class="description" value="javascript">javascript</option>
@@ -56,7 +69,7 @@
             <div class="container">
                 <h2 class="header2">Select a framework</h2>
                 <div class="defaultInput dropDown description">
-                    <select id="options" name="framework" class="description-main">
+                    <select required id="options" name="framework" class="description-main">
                         <option class="description" value="noFramework">No framework detected</option>
                         <option class="description" value="django">django</option>
                         <option class="description" value="flask">flask</option>
@@ -72,37 +85,59 @@
             <hr class="divider">
 
             <div class="container">
-                <h2 class="header2">Select provider</h2>
-                <div class="selectionContainer">
-                    <input type="radio" id="button1" name="provider" value="local">
-                    <label class="selection description" for="button1">
-                        Local host
-                    </label><br>
-                    <input type="radio" id="button2" name="provider" value="GCP">
-                    <label class="selection description" for="button2">
-                        Google cloud
-                    </label><br>
-                    <input type="radio" id="button3" name="provider" value="AWS">
-                    <label class="selection description" for="button3">
-                        Amazon cloud service
-                    </label><br>
-                    <input type="radio" id="button4" name="provider" value="linode">
-                    <label class="selection description" for="button4">
-                    Linode
-                </label><br>
-            </div>
+                <h2 class="header2">(Optional) Select a database</h2>
+                <div class="defaultInput dropDown description">
+                    <select id="databases" name="database" class="description-main">
+                        <option class="description" value="noDatabase">No database detected</option>
+                        <option class="description" value="mysql">mysql</option>
+                        <option class="description" value="postgresql">postgresql</option>
+                        <option class="description" value="mongodb">mongodb</option>
+                        <option class="description" value="sqlite">sqlite</option>
+                        <option class="description" value="cassandra">cassandra</option>
+                        <option class="description" value="redis">redis</option>
+                        <option class="description" value="couchdb">couchdb</option>
+                        <option class="description" value="dynamodb">dynamodb</option>
+                    </select>
+                </div>
             </div>
 
-            <div class="container">
 
-            <div class="container submit-container">
-                <input type="submit" value="Deploy" class="deployButton description"/>
-            </div>
-        </div>
+                <hr class="divider">
+
+                <div class="container">
+                    <h2 class="header2">Select provider</h2>
+                    <div class="selectionContainer">
+                        <input type="radio" id="button1" name="provider" value="local">
+                        <label class="selection description" for="button1">
+                            Local host
+                        </label><br>
+                        <input type="radio" id="button2" name="provider" value="GCP">
+                        <label class="selection description" for="button2">
+                            Google cloud
+                        </label><br>
+                        <input type="radio" id="button3" name="provider" value="AWS">
+                        <label class="selection description" for="button3">
+                            Amazon cloud service
+                        </label><br>
+                        <input type="radio" id="button4" name="provider" value="linode">
+                        <label class="selection description" for="button4">
+                            Linode
+                        </label><br>
+                    </div>
+                </div>
+
+
+                <div class="container">
+
+                    <div class="container submit-container">
+                        <input type="submit" value="Deploy" class="deployButton description" />
+                    </div>
+                </div>
     </form>
 
     <!-- <pre>{{ credentials }}</pre> -->
 
 
 </body>
+
 </html>
